@@ -159,7 +159,45 @@ public class SortingTest
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	private static int[] DoMergeSort(int[] value)
 	{
-		// TODO : Merge Sort 를 구현하라.
+		if(value.length == 1)
+		{
+			return value;
+		}
+		
+		int[] front = DoMergeSort(Arrays.copyOfRange(value, 0, value.length / 2));
+		int[] back = DoMergeSort(Arrays.copyOfRange(value, value.length / 2, value.length));
+		int pf = 0, pb = 0, pa = 0; // pointer of 2 subarrays and result array
+		
+		while(true)
+		{
+			if(front[pf] >= back[pb])
+			{
+				value[pa++] = back[pb++];
+				
+				if(pb >= back.length)
+				{
+					while(pf < front.length)
+					{
+						value[pa++] = front[pf++];
+					}
+					break;
+				}
+			}
+			else
+			{
+				value[pa++] = front[pf++];
+				
+				if(pf >= front.length)
+				{
+					while(pb < back.length)
+					{
+						value[pa++] = back[pb++];
+					}
+					break;
+				}
+			}
+		}
+	
 		return (value);
 	}
 
