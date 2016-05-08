@@ -103,10 +103,7 @@ public class SortingTest
 			{
 				if(value[j] > value[j + 1])
 				{
-					int temp;
-					temp = value[j];
-					value[j] = value[j + 1];
-					value[j + 1] = temp;
+					Swap(value, j, j + 1);
 				}
 			}
 		}
@@ -139,10 +136,7 @@ public class SortingTest
 			
 			for(int j = i; j >= mark; j--)
 			{
-				int temp;
-				temp = value[j];
-				value[j] = value[j + 1];
-				value[j + 1] = temp;
+				Swap(value, j, j + 1);
 			}
 		}
 		return (value);
@@ -202,7 +196,43 @@ public class SortingTest
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	private static int[] DoQuickSort(int[] value)
 	{
-		// TODO : Quick Sort 를 구현하라.
+		if(value.length == 1)
+			return value;
+		
+		int pivot = value[0];
+		int count = 0;
+		
+		for(int i = 1; i < value.length; i++)
+		{
+			if(value[i] < pivot)
+			{
+				count++;
+				if(i > count)
+				{
+					Swap(value, i, count);
+				}
+			}
+		}
+		
+		Swap(value, 0, count);
+		
+		if(count > 0)
+		{
+			int[] front = DoQuickSort(Arrays.copyOfRange(value, 0, count));
+			for(int i = 0; i < count; i++)
+			{
+				value[i] = front[i]; 
+			}
+		}
+		if(count + 1 < value.length)
+		{
+			int[] back = DoQuickSort(Arrays.copyOfRange(value, count + 1, value.length));
+			for(int i = count + 1; i < value.length; i++)
+			{
+				value[i] = back[i - count - 1];
+			}
+		}
+		
 		return (value);
 	}
 
@@ -211,5 +241,13 @@ public class SortingTest
 	{
 		// TODO : Radix Sort 를 구현하라.
 		return (value);
+	}
+	
+	static void Swap(int[] array, int index1, int index2)
+	{
+		int temp;
+		temp = array[index1];
+		array[index1] = array[index2];
+		array[index2] = temp;
 	}
 }
