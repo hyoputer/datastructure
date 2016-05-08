@@ -9,40 +9,40 @@ public class SortingTest
 
 		try
 		{
-			boolean isRandom = false;	// ÀÔ·Â¹ŞÀº ¹è¿­ÀÌ ³­¼öÀÎ°¡ ¾Æ´Ñ°¡?
-			int[] value;	// ÀÔ·Â ¹ŞÀ» ¼ıÀÚµéÀÇ ¹è¿­
-			String nums = br.readLine();	// Ã¹ ÁÙÀ» ÀÔ·Â ¹ŞÀ½
+			boolean isRandom = false;	// ì…ë ¥ë°›ì€ ë°°ì—´ì´ ë‚œìˆ˜ì¸ê°€ ì•„ë‹Œê°€?
+			int[] value;	// ì…ë ¥ ë°›ì„ ìˆ«ìë“¤ì˜ ë°°ì—´
+			String nums = br.readLine();	// ì²« ì¤„ì„ ì…ë ¥ ë°›ìŒ
 			if (nums.charAt(0) == 'r')
 			{
-				// ³­¼öÀÏ °æ¿ì
-				isRandom = true;	// ³­¼öÀÓÀ» Ç¥½Ã
+				// ë‚œìˆ˜ì¼ ê²½ìš°
+				isRandom = true;	// ë‚œìˆ˜ì„ì„ í‘œì‹œ
 
 				String[] nums_arg = nums.split(" ");
 
-				int numsize = Integer.parseInt(nums_arg[1]);	// ÃÑ °¹¼ö
-				int rminimum = Integer.parseInt(nums_arg[2]);	// ÃÖ¼Ò°ª
-				int rmaximum = Integer.parseInt(nums_arg[3]);	// ÃÖ´ë°ª
+				int numsize = Integer.parseInt(nums_arg[1]);	// ì´ ê°¯ìˆ˜
+				int rminimum = Integer.parseInt(nums_arg[2]);	// ìµœì†Œê°’
+				int rmaximum = Integer.parseInt(nums_arg[3]);	// ìµœëŒ€ê°’
 
-				Random rand = new Random();	// ³­¼ö ÀÎ½ºÅÏ½º¸¦ »ı¼ºÇÑ´Ù.
+				Random rand = new Random();	// ë‚œìˆ˜ ì¸ìŠ¤í„´ìŠ¤ë¥¼ ìƒì„±í•œë‹¤.
 
-				value = new int[numsize];	// ¹è¿­À» »ı¼ºÇÑ´Ù.
-				for (int i = 0; i < value.length; i++)	// °¢°¢ÀÇ ¹è¿­¿¡ ³­¼ö¸¦ »ı¼ºÇÏ¿© ´ëÀÔ
+				value = new int[numsize];	// ë°°ì—´ì„ ìƒì„±í•œë‹¤.
+				for (int i = 0; i < value.length; i++)	// ê°ê°ì˜ ë°°ì—´ì— ë‚œìˆ˜ë¥¼ ìƒì„±í•˜ì—¬ ëŒ€ì…
 					value[i] = rand.nextInt(rmaximum - rminimum + 1) + rminimum;
 			}
 			else
 			{
-				// ³­¼ö°¡ ¾Æ´Ò °æ¿ì
+				// ë‚œìˆ˜ê°€ ì•„ë‹ ê²½ìš°
 				int numsize = Integer.parseInt(nums);
 
-				value = new int[numsize];	// ¹è¿­À» »ı¼ºÇÑ´Ù.
-				for (int i = 0; i < value.length; i++)	// ÇÑÁÙ¾¿ ÀÔ·Â¹Ş¾Æ ¹è¿­¿ø¼Ò·Î ´ëÀÔ
+				value = new int[numsize];	// ë°°ì—´ì„ ìƒì„±í•œë‹¤.
+				for (int i = 0; i < value.length; i++)	// í•œì¤„ì”© ì…ë ¥ë°›ì•„ ë°°ì—´ì›ì†Œë¡œ ëŒ€ì…
 					value[i] = Integer.parseInt(br.readLine());
 			}
 
-			// ¼ıÀÚ ÀÔ·ÂÀ» ´Ù ¹Ş¾ÒÀ¸¹Ç·Î Á¤·Ä ¹æ¹ıÀ» ¹Ş¾Æ ±×¿¡ ¸Â´Â Á¤·ÄÀ» ¼öÇàÇÑ´Ù.
+			// ìˆ«ì ì…ë ¥ì„ ë‹¤ ë°›ì•˜ìœ¼ë¯€ë¡œ ì •ë ¬ ë°©ë²•ì„ ë°›ì•„ ê·¸ì— ë§ëŠ” ì •ë ¬ì„ ìˆ˜í–‰í•œë‹¤.
 			while (true)
 			{
-				int[] newvalue = (int[])value.clone();	// ¿ø·¡ °ªÀÇ º¸È£¸¦ À§ÇØ º¹»çº»À» »ı¼ºÇÑ´Ù.
+				int[] newvalue = (int[])value.clone();	// ì›ë˜ ê°’ì˜ ë³´í˜¸ë¥¼ ìœ„í•´ ë³µì‚¬ë³¸ì„ ìƒì„±í•œë‹¤.
 
 				String command = br.readLine();
 
@@ -68,18 +68,18 @@ public class SortingTest
 						newvalue = DoRadixSort(newvalue);
 						break;
 					case 'X':
-						return;	// ÇÁ·Î±×·¥À» Á¾·áÇÑ´Ù.
+						return;	// í”„ë¡œê·¸ë¨ì„ ì¢…ë£Œí•œë‹¤.
 					default:
-						throw new IOException("Àß¸øµÈ Á¤·Ä ¹æ¹ıÀ» ÀÔ·ÂÇß½À´Ï´Ù.");
+						throw new IOException("ì˜ëª»ëœ ì •ë ¬ ë°©ë²•ì„ ì…ë ¥í–ˆìŠµë‹ˆë‹¤.");
 				}
 				if (isRandom)
 				{
-					// ³­¼öÀÏ °æ¿ì ¼öÇà½Ã°£À» Ãâ·ÂÇÑ´Ù.
+					// ë‚œìˆ˜ì¼ ê²½ìš° ìˆ˜í–‰ì‹œê°„ì„ ì¶œë ¥í•œë‹¤.
 					System.out.println((System.currentTimeMillis() - t) + " ms");
 				}
 				else
 				{
-					// ³­¼ö°¡ ¾Æ´Ò °æ¿ì Á¤·ÄµÈ °á°ú°ªÀ» Ãâ·ÂÇÑ´Ù.
+					// ë‚œìˆ˜ê°€ ì•„ë‹ ê²½ìš° ì •ë ¬ëœ ê²°ê³¼ê°’ì„ ì¶œë ¥í•œë‹¤.
 					for (int i = 0; i < newvalue.length; i++)
 					{
 						System.out.println(newvalue[i]);
@@ -90,7 +90,7 @@ public class SortingTest
 		}
 		catch (IOException e)
 		{
-			System.out.println("ÀÔ·ÂÀÌ Àß¸øµÇ¾ú½À´Ï´Ù. ¿À·ù : " + e.toString());
+			System.out.println("ì…ë ¥ì´ ì˜ëª»ë˜ì—ˆìŠµë‹ˆë‹¤. ì˜¤ë¥˜ : " + e.toString());
 		}
 	}
 
@@ -110,7 +110,7 @@ public class SortingTest
 				}
 			}
 		}
-			
+		
 		return (value);
 	}
 
@@ -124,7 +124,7 @@ public class SortingTest
 		{
 			f = false;
 			
-			for(int j = i; j >= 0; j--) // i ¹øÂ° ±îÁö´Â ¼ÒÆÃµÊ
+			for(int j = i; j >= 0; j--) // i ë²ˆì§¸ ê¹Œì§€ëŠ” ì†ŒíŒ…ë¨
 			{
 				if(value[j] < value[i + 1])
 				{
@@ -145,14 +145,13 @@ public class SortingTest
 				value[j + 1] = temp;
 			}
 		}
-		
 		return (value);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	private static int[] DoHeapSort(int[] value)
 	{
-		// TODO : Heap Sort ¸¦ ±¸ÇöÇÏ¶ó.
+		// TODO : Heap Sort ë¥¼ êµ¬í˜„í•˜ë¼.
 		return (value);
 	}
 
@@ -197,21 +196,20 @@ public class SortingTest
 				}
 			}
 		}
-	
 		return (value);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	private static int[] DoQuickSort(int[] value)
 	{
-		// TODO : Quick Sort ¸¦ ±¸ÇöÇÏ¶ó.
+		// TODO : Quick Sort ë¥¼ êµ¬í˜„í•˜ë¼.
 		return (value);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	private static int[] DoRadixSort(int[] value)
 	{
-		// TODO : Radix Sort ¸¦ ±¸ÇöÇÏ¶ó.
+		// TODO : Radix Sort ë¥¼ êµ¬í˜„í•˜ë¼.
 		return (value);
 	}
 }
