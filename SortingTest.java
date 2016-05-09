@@ -239,7 +239,39 @@ public class SortingTest
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	private static int[] DoRadixSort(int[] value)
 	{
-		// TODO : Radix Sort 를 구현하라.
+		int d = 0;
+		
+		while(true)
+		{
+			int[] digit = new int[19];//-9 ~ 9
+			int[] result = new int[value.length];
+			
+			for(int i = 0; i < value.length; i++)
+			{
+				int num = (value[i] / (int)Math.pow(10, d)) % 10;
+				
+				digit[num + 9]++; //increment digit value
+			}
+			
+			if(digit[9] == value.length) // 해당 자리수 이상인 수가 없음
+				break;
+			
+			for(int i = 0; i < digit.length - 1; i++)
+			{
+				digit[i + 1] += digit[i]; // 그 수의 정확한 자리를 찾기 위해
+			}
+			
+			for(int i = value.length - 1; i >= 0; i--)
+			{
+				int num = (value[i] / (int)Math.pow(10, d)) % 10;
+				
+				result[(digit[num + 9]--) - 1] = value[i]; //stable 하게 넣는다
+			}
+			
+			value = result;
+			d++;
+		}
+		
 		return (value);
 	}
 	
