@@ -145,8 +145,50 @@ public class SortingTest
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	private static int[] DoHeapSort(int[] value)
 	{
-		// TODO : Heap Sort 를 구현하라.
-		return (value);
+		int[] heap = new int[value.length];
+		int size = 0;
+		
+		for(int i = 0; i < value.length; i++)
+		{
+			heap[i] = value[i];
+			int j = ++size; 
+			int parent = j / 2;
+			
+			while((parent >= 1) && (heap[j - 1] > heap[parent - 1])) //percolate up
+			{
+				Swap(heap, j - 1, parent - 1);
+				j = parent;
+				parent = j / 2;
+			}
+		}
+		
+		while(size > 0)
+		{
+			Swap(heap, 0, --size);
+			int i = 1;
+			int child = 2;
+			int rightchild = 3;
+			
+			while(child <= size)
+			{
+				if((rightchild <= size) && heap[child - 1] < heap[rightchild - 1])
+				{
+					child = rightchild;
+				}
+				
+				if(heap[i - 1] < heap[child - 1])
+				{
+					Swap(heap, i - 1, child - 1);
+				}
+				
+				i = child;
+				child = 2 * i;
+				rightchild = child + 1;
+				
+			}
+		}
+		
+		return (heap);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -283,3 +325,4 @@ public class SortingTest
 		array[index2] = temp;
 	}
 }
+
