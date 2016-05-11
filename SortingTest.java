@@ -241,44 +241,36 @@ public class SortingTest
 		if(value.length == 1)
 			return value;
 		
-		Random rand = new Random();
-		
-		int pivot = rand.nextInt(value.length - 1);
+		int pivot = value.length - 1;
 		int count = 0;
 		int equalcount = 0; //number that is equal to pivot number
 		
-		for(int i = 0; i < value.length; i++)
+		for(int i = 0; i < pivot - equalcount; i++)
 		{
-			if(i == pivot)
-				continue;
-			
 			if(value[i] < value[pivot])
 			{
 				if(i > count)
 				{
-					if(pivot == count)
-					{
-						pivot = i;
-					}
-					
 					Swap(value, i, count);
+					
 				}
 				count++;
 			}
 			
 			else if(value[i] == value[pivot])
 			{
-				if(i > pivot)
-				{
-					Swap(value, i, pivot + equalcount);
-					equalcount++;
-				}
+				equalcount++;
+				Swap(value, i, pivot - equalcount);
+				i--; // 바뀐숫자  크기 비교 위해
 			}
 		}
 		
-		for(int i = 0; i < equalcount; i++)
+		for(int i = 0; i <= equalcount; i++)
 		{
-			Swap(value, pivot + i, count + i);
+			Swap(value, pivot - i, count + i);
+			
+			if(pivot - i <= count + i)
+				break;
 		}
 		
 		if(count > 0)
@@ -289,6 +281,7 @@ public class SortingTest
 				value[i] = front[i]; 
 			}
 		}
+		
 		if(count + 1 + equalcount < value.length)
 		{
 			int[] back = DoQuickSort(Arrays.copyOfRange(value, count + 1 + equalcount, value.length));
