@@ -241,22 +241,45 @@ public class SortingTest
 		if(value.length == 1)
 			return value;
 		
-		int pivot = value[0];
-		int count = 0;
+		Random rand = new Random();
 		
-		for(int i = 1; i < value.length; i++)
+		int pivot = rand.nextInt(value.length - 1);
+		int count = 0;
+		int equalcount = 0; //number that is equal to pivot number
+		
+		for(int i = 0; i < value.length; i++)
 		{
-			if(value[i] < pivot)
+			if(i == pivot)
+				continue;
+			
+			if(value[i] < value[pivot])
 			{
-				count++;
 				if(i > count)
 				{
+					if(pivot == count)
+					{
+						pivot = i;
+					}
+					
 					Swap(value, i, count);
+				}
+				count++;
+			}
+			
+			else if(value[i] == value[pivot])
+			{
+				if(i > pivot)
+				{
+					Swap(value, i, pivot + equalcount);
+					equalcount++;
 				}
 			}
 		}
 		
-		Swap(value, 0, count);
+		for(int i = 0; i < equalcount; i++)
+		{
+			Swap(value, pivot + i, count + i);
+		}
 		
 		if(count > 0)
 		{
@@ -266,12 +289,12 @@ public class SortingTest
 				value[i] = front[i]; 
 			}
 		}
-		if(count + 1 < value.length)
+		if(count + 1 + equalcount < value.length)
 		{
-			int[] back = DoQuickSort(Arrays.copyOfRange(value, count + 1, value.length));
-			for(int i = count + 1; i < value.length; i++)
+			int[] back = DoQuickSort(Arrays.copyOfRange(value, count + 1 + equalcount, value.length));
+			for(int i = count + 1 + equalcount; i < value.length; i++)
 			{
-				value[i] = back[i - count - 1];
+				value[i] = back[i - count - 1 - equalcount];
 			}
 		}
 		
